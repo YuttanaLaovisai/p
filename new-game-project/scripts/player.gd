@@ -70,8 +70,6 @@ func _physics_process(delta: float) -> void:
 			
 			elif input_dir.y > 0:
 				anim.play_backwards("Walk", 3) 
-			if input_dir.x != 0:
-				anim.play("Walk", 3)
 
 		else:
 			anim.play("Idle", 1)
