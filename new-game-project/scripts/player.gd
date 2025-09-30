@@ -44,13 +44,13 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("space") and is_on_floor():
 		is_jumping = true
-		anim.play("Jump_Start", 0.2)
+		anim.play("Jump_Start", 1)
 		anim.queue("Jump")   
 		velocity.y = 4.5
 
 	if not is_on_floor() and !is_jumping and velocity.y < 0:
 		is_jumping = true
-		anim.play("Jump", 0.2)  
+		anim.play("Jump", 1)  
 
 	var input_dir := Input.get_vector("a", "d", "w", "s")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -59,20 +59,27 @@ func _physics_process(delta: float) -> void:
 		if direction:
 			if input_dir.y < 0: 
 				if Input.is_action_pressed("shift"):
-					anim.play("Sprint", 0.2)
+					anim.play("Sprint", 3)
 				else:
-					anim.play("Walk", 0.2)
+					anim.play("Walk", 3)
+			if input_dir.x != 0: 
+				if Input.is_action_pressed("shift"):
+					anim.play("Sprint", 3)
+				else:
+					anim.play("Walk", 3)
 			
 			elif input_dir.y > 0:
-				anim.play_backwards("Walk", 0.2) 
+				anim.play_backwards("Walk", 3) 
+			if input_dir.x != 0:
+				anim.play("Walk", 3)
 
 		else:
-			anim.play("Idle", 0.2)
+			anim.play("Idle", 1)
 
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
 	move_and_slide()
 
 	if is_on_floor() and is_jumping and velocity.y <= 0:
-		anim.play("Jump_Land", 0.2)
+		anim.play("Jump_Land", 0.3)
 		is_jumping = false

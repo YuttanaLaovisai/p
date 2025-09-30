@@ -10,9 +10,13 @@ config_version=5
 
 [application]
 
-config/name="New Game Project"
+config/name="horror"
 run/main_scene="uid://cbr6sqaig57ht"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+
+[filesystem]
+
+import/blender/enabled=false
 
 [input]
 
@@ -61,4 +65,4 @@ r_click={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(9.62615e-08, 0.0836489, 0.273574, 1)
+environment/defaults/default_clear_color=Color(1, 1, 1, 1)
