@@ -11,8 +11,17 @@ config_version=5
 [application]
 
 config/name="horror"
-run/main_scene="uid://cbr6sqaig57ht"
+run/main_scene="uid://cabmk5vicvom7"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+
+[autoload]
+
+GlobalInventory="*res://scripts/global_inventory.gd"
+SceneTransition="*res://scenes/scene_transition.tscn"
+
+[display]
+
+window/size/mode=3
 
 [filesystem]
 
@@ -65,4 +74,3 @@ r_click={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(1, 1, 1, 1)

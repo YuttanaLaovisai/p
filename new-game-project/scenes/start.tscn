@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=3 uid="uid://cabmk5vicvom7"]
+
+[ext_resource type="Script" uid="uid://bhtmwfpahi5t8" path="res://scripts/start.gd" id="1_0auqf"]
+[ext_resource type="PackedScene" uid="uid://bmjvr6kv4a1tu" path="res://scenes/abandoned_house.tscn" id="1_u80x2"]
+[ext_resource type="Shader" uid="uid://bxjdnbffy5er6" path="res://shader/main.gdshader" id="2_bodal"]
+[ext_resource type="Texture2D" uid="uid://cwl833bi2mjlm" path="res://assets/Skybox.png" id="3_bodal"]
+[ext_resource type="Script" uid="uid://b6ir5k1mwwxhu" path="res://scripts/camera_3d.gd" id="3_kdmts"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdmts"]
+shader = ExtResource("2_bodal")
+shader_parameter/desaturation = 0.6
+shader_parameter/sepia_strength = 0.4
+shader_parameter/noise_strength = 0.15
+shader_parameter/noise_scale = 50.0
+shader_parameter/time_speed = 1.5
+shader_parameter/scanline_strength = 0.05
+shader_parameter/vignette_strength = 0.8
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kdmts"]
+panorama = ExtResource("3_bodal")
+
+[sub_resource type="Sky" id="Sky_tbgi4"]
+sky_material = SubResource("PanoramaSkyMaterial_kdmts")
+
+[sub_resource type="Environment" id="Environment_0auqf"]
+background_mode = 2
+sky = SubResource("Sky_tbgi4")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+glow_intensity = 8.0
+fog_sun_scatter = 0.69
+
+[node name="start" type="Node3D"]
+script = ExtResource("1_0auqf")
+
+[node name="Abandoned_House" parent="." instance=ExtResource("1_u80x2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.637, 0, 94.793)
+
+[node name="filter" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_kdmts")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.999186, -0.0403272, -0.000456772, 0.0394911, 0.976046, 0.21395, -0.00818218, -0.213794, 0.976844, -2.2655, 2.04883, -2.57585)
+script = ExtResource("3_kdmts")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0auqf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.729578, -0.573149, -0.373118, 0.445878, -0.0150488, 0.894967, -0.518564, -0.819313, 0.244575, -4.93839, 16.8988, 2.53228)
+light_energy = 0.365
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="name" type="Label" parent="CanvasLayer"]
+offset_left = 84.0
+offset_top = 91.0
+offset_right = 698.0
+offset_bottom = 228.0
+theme_override_font_sizes/font_size = 100
+text = "Silent Village"
+
+[node name="play" type="Button" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = 26.0
+offset_right = 340.0
+offset_bottom = 126.0
+grow_vertical = 2
+text = "play"
+
+[node name="exit" type="Button" parent="CanvasLayer"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 40.0
+offset_top = 176.0
+offset_right = 340.0
+offset_bottom = 276.0
+grow_vertical = 2
+text = "exit"
+
+[connection signal="pressed" from="CanvasLayer/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/exit" to="." method="_on_exit_pressed"]
