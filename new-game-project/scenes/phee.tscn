@@ -1,23 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://qhpy4olca2cu"]
+[gd_scene load_steps=3 format=3 uid="uid://qhpy4olca2cu"]
 
 [ext_resource type="PackedScene" uid="uid://pl2yh5vnhpr5" path="res://assets/phee.glb" id="1_a3rj2"]
-[ext_resource type="Script" uid="uid://vnip8dgjq7yb" path="res://scripts/phee.gd" id="1_y2g8d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oncho"]
-radius = 0.248189
-height = 2.03533
+radius = 0.0868385
+height = 0.188234
 
 [node name="phee" type="CharacterBody3D"]
-script = ExtResource("1_y2g8d")
+floor_max_angle = 1.55334
 
 [node name="phee" parent="." instance=ExtResource("1_a3rj2")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.221212, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.103163, 0)
 shape = SubResource("CapsuleShape3D_oncho")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0837617, 0)
-target_position = Vector3(0, 0, 3)
-
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="FootstepPlayer" type="AudioStreamPlayer3D" parent="."]

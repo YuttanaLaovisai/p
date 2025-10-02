@@ -1,12 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgrsfuexjkvmp"]
+[gd_scene load_steps=4 format=3 uid="uid://dgrsfuexjkvmp"]
 
 [ext_resource type="Script" uid="uid://b6jb64qs2tfxi" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="AudioStream" uid="uid://5sx1524m2546" path="res://assets/footstep-372877.mp3" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g2brh"]
 radius = 0.272766
 height = 1.57467
 
-[node name="player" type="CharacterBody3D"]
+[node name="player" type="CharacterBody3D" groups=["player"]]
 floor_max_angle = 1.55334
 script = ExtResource("1_g2els")
 
@@ -20,13 +21,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.44824, 0)
 [node name="Camera3D" type="Camera3D" parent="Pivot"]
 
 [node name="RayCast3D" type="RayCast3D" parent="Pivot/Camera3D"]
-target_position = Vector3(0, 0, -3)
+target_position = Vector3(0, 0, -2)
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Pivot/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.379998)
 light_energy = 2.0
+shadow_bias = 10.0
 spot_range = 8.28357
 spot_angle = 34.1754
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Pivot/Camera3D"]
+current = true
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
@@ -51,13 +56,13 @@ vertical_alignment = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -255.0
-offset_top = 84.0
-offset_right = 69.0
-offset_bottom = 192.0
+offset_left = -283.0
+offset_top = 107.0
+offset_right = 41.0
+offset_bottom = 215.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
-text = "Find all the car parts 
+text = "Find the car parts 
 – Tires: 2/4
 – Fuel: 0/1."
 
@@ -65,10 +70,15 @@ text = "Find all the car parts
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -200.0
-offset_top = 44.0
-offset_right = -91.0
-offset_bottom = 78.0
+offset_left = -228.0
+offset_top = 67.0
+offset_right = -119.0
+offset_bottom = 101.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
 text = "Objective"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_g2els")
+volume_db = -30.0
+parameters/looping = true

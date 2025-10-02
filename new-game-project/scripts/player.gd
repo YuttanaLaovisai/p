@@ -30,12 +30,20 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
+	if !Globalkey.is_on:
+		$objective.visible = false
+		$part.visible = false
+	else:
+		$objective.visible = true
+		$part.visible = true
 	
 	part.text = "Find all the car parts \n– Tires: "+str(GlobalInventory.tire)+"/4\n– Fuel: "+str(GlobalInventory.fuel)+"/1."
 	
 	if Input.is_action_just_pressed("shift"):
+		$AudioStreamPlayer3D.pitch_scale *=  1.5
 		speed *= 2
 	if Input.is_action_just_released("shift"):
+		$AudioStreamPlayer3D.pitch_scale /=  1.5
 		speed /= 2
 
 func _physics_process(delta: float) -> void:
@@ -53,10 +61,16 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("a", "d", "w", "s")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
+	if input_dir != Vector2.ZERO:
+		if !$AudioStreamPlayer3D.playing:
+			$AudioStreamPlayer3D.play()
+	else:
+		$AudioStreamPlayer3D.stop()
 
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
 	move_and_slide()
+
 	
 	var collision = raycast.get_collider()
 

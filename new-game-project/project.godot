@@ -18,6 +18,8 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 
 GlobalInventory="*res://scripts/global_inventory.gd"
 SceneTransition="*res://scenes/scene_transition.tscn"
+GlobalSound="*res://scripts/GlobalSound.gd"
+Globalkey="*res://scripts/Globalkey.gd"
 
 [display]
 
