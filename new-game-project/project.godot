@@ -13,6 +13,8 @@ config_version=5
 config/name="horror"
 run/main_scene="uid://cabmk5vicvom7"
 config/features=PackedStringArray("4.4", "GL Compatibility")
+boot_splash/image="uid://1chn4vmhmp60"
+boot_splash/minimum_display_time=3000
 
 [autoload]
 
