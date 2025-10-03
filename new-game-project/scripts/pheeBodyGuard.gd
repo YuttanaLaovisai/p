@@ -38,10 +38,13 @@ func _physics_process(delta: float) -> void:
 		global_transform.origin = pathfollow.global_transform.origin
 		var forward = -pathfollow.transform.basis.z
 		var target_basis = Basis.looking_at(forward, Vector3.UP)
-		var new_basis = global_transform.basis.slerp(target_basis, delta * 3.0)
-		global_transform.basis = new_basis.orthonormalized()
+		#var new_basis = global_transform.basis.slerp(target_basis, delta * 3.0)
+		#global_transform.basis = new_basis.orthonormalized()
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
-		get_tree().change_scene_to_file("res://scenes/jumpscare.tscn")
+		call_deferred("_do_change_scene")
+
+func _do_change_scene():
+	get_tree().change_scene_to_file("res://scenes/jumpscare.tscn")
